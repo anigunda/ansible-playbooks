@@ -1,4 +1,5 @@
 jdbc_username: sonarqube
 jdbc_password: s0narqub3
+jdbc_db_name: sonarqube
 web_context: /sonar
 web_port: 9000
