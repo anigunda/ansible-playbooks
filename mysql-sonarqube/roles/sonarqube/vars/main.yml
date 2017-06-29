@@ -1,0 +1,5 @@
+vars:
+  jdbc_username: sonarqube
+  jdbc_password: s0narqub3
+  web_context: /sonar
+  web_port: 9000

@@ -1,0 +1,5 @@
+- hosts: localhost
+  roles:
+    - java8
+    - mysql
+    - sonarqube

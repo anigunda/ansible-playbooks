@@ -1,0 +1,34 @@
+- name: Install MySQL Packages
+  apt: pkg={{item}} state=installed
+  with_items:
+    - bundler
+    - mysql-server-core-5.7
+    - mysql-client-core-5.7
+    - libmysqlclient-dev
+    - python-mysqldb
+    - mysql-server
+    - mysql-client
+    - build-essential
+
+- name: Remove the MySQL test database
+  mysql_db: db=test state=absent
+
+- name: Create global my.cnf
+  template: src=my.cnf.j2 dest=/etc/mysql/my.cnf
+
+- name: Create DB for SonarQube
+  mysql_db: name={{db_name}} state=present collation=utf8_general_ci encoding=utf8
+
+- name: Create DB User and Grant Permissions
+  mysql_user: name={{db_user}} password={{db_password}} host="%" priv={{db_name}}.*:ALL,GRANT state=present
+
+- name: Set root password for MysQL
+  mysql_user: name=root password={{db_root_password}} host="{{item}}" priv=*.*:ALL,GRANT state=present
+  with_items:
+    - "{{ansible_hostname}}"
+    - 127.0.0.1
+    - ::1
+    - localhost
+
+- name: Restart the MySQL service
+  action: service name=mysql state=restarted enabled=true
