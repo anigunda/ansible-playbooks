@@ -34,4 +34,4 @@
     - localhost
 
 - name: Restart the MySQL service
-  action: service name=mysql state=restarted enabled=true
+  service: name=mysql state=started enabled=yes
