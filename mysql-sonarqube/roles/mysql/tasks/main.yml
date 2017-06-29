@@ -22,6 +22,9 @@
 - name: Create DB User and Grant Permissions
   mysql_user: name={{db_user}} password={{db_password}} host="%" priv={{db_name}}.*:ALL,GRANT state=present
 
+- name: Create local my.cnf for root user
+  template: src=mylocal.cnf.j2 dest=/root/.my.cnf owner=root mode=0600
+
 - name: Set root password for MysQL
   mysql_user: name=root password={{db_root_password}} host="{{item}}" priv=*.*:ALL,GRANT state=present
   with_items:

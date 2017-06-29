@@ -1,5 +1,4 @@
-vars:
-  db_name: sonarqube
-  db_user: sonarqube
-  db_password: s0narqub3
-  db_root_password: s0n@rqub3
+db_name: sonarqube
+db_user: sonarqube
+db_password: s0narqub3
+db_root_password: s0n@rqub3
